@@ -1,8 +1,8 @@
-import argparse
 import string as string_mod
 import random
 
-ALPH_CHAR_NB = 26  # Nombre de lettres dans l'alphabet
+# Nombre de lettres dans l'alphabet
+ALPH_CHAR_NB = 26
 # L'addresse de la première lettre minuscule de l'alphabet latin dans la table ASCII
 ALPH_LOWER_ASCII_BEG = 97
 
@@ -11,7 +11,6 @@ alph = list(string_mod.ascii_lowercase)
 
 
 # Ce programme permet le chiffrement et déchiffrement de tous les caractères de l'alphabet latin minuscule
-
 # Les spécifications de chaque méthode sont décrites dans README.md
 
 
@@ -84,34 +83,49 @@ def decrypt_vigenere(msg, key):
 # Polybe
 
 
-def without(arr, pred):
-    '''Renvoie l'array en enlevant préalablement `pred`'''
-    if pred not in arr:
-        raise ValueError  # Si pred n'est pas dans l'array, alors on ne peut pas l'enlever
-    a = alph
-    a.remove(pred)
-    return a
 
-def filter(arr, register = alph):
-    '''Supprime de `arr` tout élément qui ne fait pas partie de `register`'''
-    for i in arr:
-        if i not in register:
-            arr.remove(i)
+def without(l, pred):
+    '''Retourne l en retirant pred (première occurence)'''
+    res = l.copy()
+    res.remove(pred)
+    return res
 
-def encrypt_polybe(msg, l):
+
+# Crée une nouvelle liste à partir de "alph" en excluant 'i'
+pred, rep = 'i', 'j' # 'i' et 'j' sont fusionnés dans le carré de polybe
+polybian = without(alph, 'i')
+sub_length = 5
+
+
+def encrypt_polybian(msg, polybian=polybian, pred=pred, rep=rep):
     '''Renvoie "msg" chiffré à l'aide de la méthode du Code de Vigenère (si msg vide le msg chiffré est vide)
-    Si `msg` contient des caractères ne faisant pas partie de `alph`, ceux-ci sont retirés (le principe de la méthode oblige)'''
+    Si `msg` contient des caractères ne faisant pas partie de `alph`, ceux-ci ne seront pas chiffrés'''
+
     
-    filter(msg, alph) # On enlève de `msg` chaque lettre qui ne fait pas partie de `alph` (pour s'éviter des validations par la suite)
+    res = ""  # Séquence finale de coordonnées dans le carré de Polybe
+    space = False
+    for char in msg.lower():  # Message en minuscule
+        # Pred et rep (par défaut 'i' et 'j') sont fusionnés dans le carré
+        if char == pred:
+            char = rep
+        space = (char == ' ')
+        if char in polybian:  # On ne chiffre aucun caractère qui n'appartienne pas à l'alphabet restreint
+            # accède à l'indice du caratcère dans polybian
+            index = polybian.index(char)
+        # Ajout des coordonnées du caractère à la string de retour
+        res = res + f"{index//sub_length}{index%sub_length}{'|' if space else ' '}"
+    return res
+
+
+def decrypt_polybian(encrypted):
+    res = ""
+    for word in encrypted.split('|'):
+        for coords in word.split():  
+            x, y = coords
+            res = res + polybian[int(x)*sub_length + int(y)]
     
-    # Si la lettre que l'on souhaite retirer n'est pas dans `alph`, alors on prend `alph` tout entier
-    # (cas en réalité improbable, car l'on sait que `j` est dans l'alphabet latin minuscule)
-    polybian_alph = without(alph, )
-    string = ""
-    for i in msg.lower():
-        # Pas besoin ici de catch une potentielle exception 
-        index = alph.index(i)
-        string = string + (f"{len(polybian_alph)//l}{polybian_alph}")
+    return res
+
 
 
 # Tests
@@ -120,7 +134,7 @@ msgs = ["je m'appelle chaton", "@you, how are you doing?",
 keys = [i**2 for i in range(5)] + [26, 27, 10, 13, 51, 100, 1028]
 
 # Encrypts/Decrypts
-print(encrypt_polybe("Hey"))
-encrypt = encrypt_vigenere("Je m'appelle Tristan", "Yolo 21!@")
+print(without(alph, 'i'))
+encrypt = encrypt_polybian("cereales avec lait")
 print(encrypt)
-print(decrypt_vigenere(encrypt, "Yolo 21!"))
+print(decrypt_polybian(encrypt))
