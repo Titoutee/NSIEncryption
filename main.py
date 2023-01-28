@@ -39,7 +39,7 @@ action = OptionMenu(root, tk_action, *actions)
 action.grid()
 
 # Bouton d'action (chiffrer/déchiffrer)
-ttk.Button(root, text="Encrypt", command=lambda: compute(output, message, key, tk_method, tk_action)).grid(row=3)
+ttk.Button(root, text="Compute", command=lambda: compute(output, message, key, tk_method, tk_action)).grid(row=3)
 
 # Résultat
 output = ttk.Label(root, text="")
