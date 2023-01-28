@@ -1,6 +1,7 @@
 import random
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 from gui_ext import *
 
 # Ce programme permet le chiffrement et déchiffrement de tous les caractères de l'alphabet latin minuscule
@@ -44,6 +45,8 @@ ttk.Button(root, text="Encrypt", command=lambda: compute(output, message, key, t
 output = ttk.Label(root, text="")
 output.grid(row=4)
 
+
+ttk.Button(root, text = "Infos", command=info).grid()
 ttk.Button(root, text="Quit", command=root.destroy).grid(sticky="s")
 
 root.mainloop()

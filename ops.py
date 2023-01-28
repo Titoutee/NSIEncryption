@@ -1,4 +1,5 @@
 import string as string_mod
+from utils import *
 
 # Nombre de lettres dans l'alphabet
 ALPH_CHAR_NB = 26
@@ -80,18 +81,6 @@ def decrypt_vigenere(msg, key):
 
 
 # Polybe
-
-
-def without(l, pred):
-    '''Retourne l en retirant pred (première occurence)
-    # l doit être non-vide et doit contenir pred au moins une fois'''
-    res = l.copy()
-    res.remove(pred)
-    return res
-
-
-# Crée une nouvelle liste à partir de "alph" en excluant 'i'
-
 
 
 def encrypt_polybius(msg, pred='i', rep='j'):
