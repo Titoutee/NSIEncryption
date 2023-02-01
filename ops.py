@@ -1,5 +1,6 @@
 import string as string_mod
 from utils import *
+from re import *
 
 # Nombre de lettres dans l'alphabet
 ALPH_CHAR_NB = 26
@@ -104,6 +105,9 @@ def encrypt_polybius(msg, pred='i', rep='j'):
 
 def decrypt_polybius(encrypted, pred='i'):
     '''Renvoie les caractères correspondant aux coordonnées présentes dans le message chiffré'''
+    if fullmatch("^(\d{2}(?:\s|$))*$", encrypted) == None:
+        return ""
+    
     polybius = without(list(string_mod.ascii_lowercase), pred)
     sub_len = 5
     res = ""
