@@ -27,3 +27,7 @@
 # -ops.py: implémentations des fonctions de chiffrement et déchiffrement de chaque méthode
 # -utils.py: fonctions diverses
 # -gui_ext.py: fonctions externes servant pour la création de l'interface graphique
+
+
+# A installer possiblement avant de lancer le programme:
+# -Tkinter (librairie externe)
