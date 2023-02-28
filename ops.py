@@ -105,7 +105,7 @@ def encrypt_polybius(msg, pred='i', rep='j'):
 
 def decrypt_polybius(encrypted, pred='i'):
     '''Renvoie les caractères correspondant aux coordonnées présentes dans le message chiffré'''
-    if fullmatch("^(\d{2}(?:\s|$))*$", encrypted) == None:
+    if fullmatch("^(\d{2}(?:\s|$))*$", encrypted) == None: # Expression régulière vérifiant le bon format du message à déchiffrer
         return ""
     
     polybius = without(list(string_mod.ascii_lowercase), pred)
