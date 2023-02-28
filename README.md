@@ -8,7 +8,7 @@
 
 
 # ROT13:
-# -version spécial du Code de César, avc une clé prédéfinie égale à 13
+# -version spéciale du Code de César, avec une clé prédéfinie égale à 13
 
 
 # Code de Vigenère:
