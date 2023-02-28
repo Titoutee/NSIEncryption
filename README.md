@@ -22,3 +22,8 @@
 # -chaque lettre du message est chiffré en donnant ses coordonnées dans la liste de caractères (matrice "virtuelle" dans mon implémentation)
 
 # Chacune des méthodes n'opère que sur l'alphabet latin
+
+# Fichiers:
+# -ops.py: implémentations des fonctions de chiffrement et déchiffrement de chaque méthode
+# -utils.py: fonctions diverses
+# -gui_ext.py: fonctions externes servant pour la création de l'interface graphique
